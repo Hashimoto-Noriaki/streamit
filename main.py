@@ -1,21 +1,17 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
+from PIL import Image
+import io
 
-st.title('My 1st app')
+st.title('顔認識アプリ')
 
-st.write('データ')
-st.write(
-    pd.DataFrame({
-        '1st columin': [1, 2, 3, 4],
-        '2st columin': [10, 20, 30, 40],
-    })
-)
+# file_uploader() はファイルをアップロードする機能
+uploaded_file = st.file_uploader("Choose an image...", type=['jpg', 'jpeg', 'png'])
 
-# チェックボックスがオンの場合のみ DataFrame を表示
-if st.checkbox('Show DataFrame'):
-    chart_df = pd.DataFrame(
-        np.random.randn(20, 3),
-        columns=['a', 'b', 'c']
-    )
-    st.line_chart(chart_df)
+# 画像が入ってきたら画像を表示
+if uploaded_file is not None:
+    try:
+        # バイナリストリームとして画像を開く
+        img = Image.open(io.BytesIO(uploaded_file.read()))
+        st.image(img, caption='Uploaded Image.', use_column_width=True)
+    except Exception as e:
+        st.error(f"画像を処理できませんでした: {e}")
