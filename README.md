@@ -43,3 +43,7 @@ streamlit hello
 ```
 streamlit run main.py
 ```
+
+### pandas
+https://www.seplus.jp/dokushuzemi/blog/2020/04/tech_words_pandas.html
+
